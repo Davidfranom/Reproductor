@@ -34,24 +34,33 @@ void Track_Delete( Track** this )
 void Track_ChangeTitle( Track* this )
 {
     printf("\nNombre de la cancion: ");
-    fflush( stdin );
-    gets(this->title);
+    //fflush( stdin );
+    fgets(this->title,MAX,stdin);
+    fgets(this->title,MAX,stdin);
+    //scanf("%[^\n]",this->title);
+    //gets(this->title);
     //printf("Nuevo nombre: %s ", this->title );
 }
 
 void Track_ChangePerformer( Track* this )
 {
     printf("Artista: ");
-    fflush( stdin );
-    gets( this->performer );
+    //fflush( stdin );
+    fgets(this->performer,MAX,stdin);
+    fgets(this->performer,MAX,stdin);
+    //scanf("%[^\n]",this->performer);
+    //gets( this->performer );
     //printf("Nombre del artista: %s ", this->performer );
 }
 
 void Track_ChangeGenre( Track* this )
 {
     printf("Genero: ");
-    fflush( stdin );
-    gets( this->genre );
+    //fflush( stdin );
+    fgets(this->genre,MAX,stdin);
+    fgets(this->genre,MAX,stdin);
+    //scanf("%[^\n]",this->genre);
+    //gets( this->genre );
     //printf("Nombre del genero: %s ", this->genre );
 }
 
@@ -81,6 +90,21 @@ void Print_DataTrack( Track* this )
     printf("Año de salida: %d \n", this->year );
     printf("Tiempo de duración: %0.2f min \n\n", this->duration );
 }
+
+char* Track_GetTitle(Track* this){
+	assert(this);
+	return (char*)this->title;
+}
+float Track_GetDuration(Track* this){
+	assert(this);
+	return this->duration;
+}
+
+//Para Traverse
+void Print_TrackTitle(Track item,size_t c){
+	printf("%ld. %s\n",c,item.title);
+}
+
 
 
 /*Funciones de Erandi

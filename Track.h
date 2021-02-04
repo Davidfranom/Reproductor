@@ -27,6 +27,11 @@ void    Track_ChangeYear(       Track* this );
 void    Track_ChangeDuration(   Track* this );
 void    Print_DataTrack(        Track* this );
 
+char*   Track_GetTitle(Track* this);
+float Track_GetDuration(Track* this);
+
+void Print_TrackTitle(Track item,size_t c);
+
 
 
 

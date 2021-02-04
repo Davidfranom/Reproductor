@@ -1,11 +1,6 @@
 #include "Menus.h"
 #define WIN
-void Print_TrackTitle(Track item,size_t c){
-	printf("%ld. %s\n",c,item.title);
-}
-void Print_PlaylistName(Playlist item,size_t c){
-	printf("%ld. %s\n",c,item.name);
-}
+
 
 void Clear()
 {
@@ -22,7 +17,7 @@ void Clear()
 void PrintMenuPrincipal(Player* this,Playlist* that)
 
 {
-	printf("\nReproductor (%d playlists)(%d canciones)\n",Player_Len(this),Playlist_Len(that));
+	printf("\nReproductor (%ld playlists)(%ld canciones)\n",Player_Len(this),Playlist_Len(that));
 	
     printf("\n\tMenú principal\n");
     printf("A) Lista de canciones completa\n");    //Mostraria todas las canciones de la lista principal
@@ -42,7 +37,7 @@ void PrintMenuPrincipal(Player* this,Playlist* that)
 void PrintMenuPlaylist(Playlist* this)
 {
 	
-	printf("\nPlaylist: %s (%d canciones)\n",this->name,Playlist_Len(this));
+	printf("\nPlaylist: %s (%ld canciones)\n",Playlist_GetName(this),Playlist_Len(this));
 	
     printf("\n\tMenú para Playlist\n");
     printf("A) Agregar canción\n");       										//Agrega una canción a la playlist en la que se este trabajando
@@ -55,15 +50,19 @@ void PrintMenuPlaylist(Playlist* this)
 }
 
 void PrintMenuCancion(Playlist* this,bool play)
-{	if(play){
+{	
+
+	
+	if(play){
 		printf("\nReproduciendo: ");
 	} else{
 		printf("\nEn pausa: ");
 	}
 	
-	printf("%s\n",this->cursor->datos.title);
 	
-	Print_DataTrack(&this->cursor->datos);
+	printf("%s\n",Track_GetTitle(Playlist_Get(this)));//Aqui
+	  
+	Print_DataTrack(Playlist_Get(this));
 	
     printf("\n\tMenú para Cancion\n");
     printf("R) Siguiente\n");       
@@ -85,7 +84,7 @@ void TestMenuCancion(Playlist* this)
     do{
     	PrintMenuCancion(this,play);
         printf("\ncmd > > >: ");
-        scanf( "%s", &str );
+        scanf( "%s", (char*)&str );
         cmd = str[0];
 
         switch( cmd )
@@ -123,13 +122,14 @@ void TestMenuPlaylist( Player* player, Playlist* this, Playlist* that) 			//Debe
     int opt;
     char cmd;
     char str[80];
+    //Track t;
 
     //PrintMenuPlaylist(this);
 
     do{
     	PrintMenuPlaylist(this);
         printf("\ncmd > > >: ");
-        scanf( "%s", &str );
+        scanf( "%s", (char*)&str );
         cmd = str[0];
 
         switch( cmd )
@@ -159,9 +159,9 @@ void TestMenuPlaylist( Player* player, Playlist* this, Playlist* that) 			//Debe
             	Playlist_Cursor_prev(that);
             																	///////////////////////////////////
             	
-            	Track v1=Playlist_Get(that);
-                Playlist_Insert_back( this, &v1 ); 
-				printf("\nInsertando %s en %s...\n",v1.title,this->name);
+            	Track* v1=Playlist_Get(that);
+                Playlist_Insert_back( this, v1 ); 
+				printf("\nInsertando %s en %s...\n",Track_GetTitle(v1),Playlist_GetName(this)); //v1.title
                 
                 //Print_DataTrack( v1 );
             break;
@@ -176,8 +176,8 @@ void TestMenuPlaylist( Player* player, Playlist* this, Playlist* that) 			//Debe
                     Playlist_Cursor_front( this );
 
                     for( size_t i = 0; i<Playlist_Len( this ); ++i ){
-                        printf("%d.- ",i+1); 
-						puts( this->cursor->datos.title ); 						//Mostramos la lista de canciones en la playlist
+                        printf("%ld.- ",i+1);
+						puts( Track_GetTitle(Playlist_Get(this)));//Aqui						//Mostramos la lista de canciones en la playlist
                         Playlist_Cursor_next( this );
                     }
 
@@ -189,7 +189,8 @@ void TestMenuPlaylist( Player* player, Playlist* this, Playlist* that) 			//Debe
 
                     if( p == 1){
                         printf("Removiendo "); 
-						puts( this->cursor->datos.title); 
+                        
+						puts( Track_GetTitle(Playlist_Get(this)));//Aqui
 						printf("...\n");
 						
                         Playlist_Remove_front( this );
@@ -199,7 +200,8 @@ void TestMenuPlaylist( Player* player, Playlist* this, Playlist* that) 			//Debe
                             Playlist_Cursor_next( this );
                         }
                         printf("Removiendo "); 
-						puts( this->cursor->datos.title);
+                        
+						puts(Track_GetTitle(Playlist_Get(this)));//Aqui//this->cursor->datos.title
                         Playlist_Remove( this );
                     }
                 }
@@ -234,7 +236,7 @@ void TestMenuPlaylist( Player* player, Playlist* this, Playlist* that) 			//Debe
 						//puts( this->cursor->datos.title);
                     }
                     
-                    Track t=Playlist_Get(this);
+                    //t=Playlist_Get(this);
                     TestMenuCancion(this);										//Simulación de la reproducción
 
                 }
@@ -259,6 +261,8 @@ void TestPrincipal()
 {
 	int opt;
 	int id=1;
+	//Playlist p;
+	//Track t;
 	
     char cmd;
     char str[80];
@@ -276,7 +280,7 @@ void TestPrincipal()
     do{
     	PrintMenuPrincipal(player,playlist_gral);
         printf("\ncmd > > >: ");
-        scanf("%s", &str );
+        scanf("%s", (char*)&str );
         cmd = str[ 0 ];
 
         switch( cmd )
@@ -296,8 +300,8 @@ void TestPrincipal()
             	}
             	Playlist_Cursor_prev(playlist_gral);
             																	/////////////////////////
-            	
-            	printf("Se elimino la cancion: %s\n",playlist_gral->cursor->datos.title);
+            
+            	printf("Se elimino la cancion: %s\n",Track_GetTitle(Playlist_Get(playlist_gral)));//Aqui//playlist_gral->cursor->datos.title
             	
             																
             	Player_GralRemove(player,Playlist_GetID(playlist_gral));		//Elimina la cancion de todas las playlists
@@ -308,7 +312,7 @@ void TestPrincipal()
         		Track *v2 = Track_New(id);
         		
                 Playlist_Insert_back( playlist_gral, v2 ); 
-				printf("\nInsertando %s en %s...\n",v2->title,playlist_gral->name);
+				printf("\nInsertando %s en %s...\n",Track_GetTitle(v2),Playlist_GetName(playlist_gral));
 				
     			Track_Delete( &v2 );
 
@@ -340,8 +344,11 @@ void TestPrincipal()
 
                 char name[MAX];
                 
-                fflush( stdin );
-                gets(name);
+                //fflush( stdin );
+                fgets(name,MAX,stdin);
+    			fgets(name,MAX,stdin);
+                //scanf("%[^\n]",name);
+                //gets(name);
                 
                 Playlist* p1 = Playlist_New( name );
     
@@ -371,7 +378,8 @@ void TestPrincipal()
             	Player_Cursor_prev(player);
             	//////////////////////////////
             	
-            	printf("Se elimino la playlist: %s", player->cursor->datos.name);
+            	
+            	printf("Se elimino la playlist: %s",Playlist_GetName(Player_Get(player)) );//Aqui//player->cursor->datos.name
             	Player_Remove(player);               
 
             break;
@@ -391,7 +399,7 @@ void TestPrincipal()
             	Player_Cursor_prev(player);
             	/////////////////////////////////////////
             	
-                TestMenuPlaylist(player,&player->cursor->datos,playlist_gral);                    
+                TestMenuPlaylist(player,Player_Get(player),playlist_gral);//Aqui//&player->cursor->datos            
                 
 				//PrintMenuPrincipal(player,playlist_gral);
             break;

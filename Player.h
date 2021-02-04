@@ -34,7 +34,7 @@ void Player_Remove_front( Player* this );
 void Player_Remove_back( Player* this );
 void Player_Remove( Player* this );
 
-Playlist Player_Get( Player* this );
+Playlist* Player_Get( Player* this );
 
 void Player_Cursor_front( Player* this );
 void Player_Cursor_back( Player* this );

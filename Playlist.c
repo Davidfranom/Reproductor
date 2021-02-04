@@ -155,10 +155,10 @@ void Playlist_Remove_back( Playlist* this )
 }
 
 
-Track Playlist_Get( Playlist* this ) // se tiene que modificar
+Track* Playlist_Get( Playlist* this ) // se tiene que modificar
 {
 	assert( this->cursor );
-	return this->cursor->datos;
+	return &this->cursor->datos;
 }
 
 
@@ -238,5 +238,15 @@ void Playlist_GralRemove( Playlist* this, size_t id )
 size_t Playlist_GetID(Playlist* this){
 	assert(this->cursor);
 	return this->cursor->datos.id;
+}
+
+char* Playlist_GetName(Playlist* this){
+	assert(this);
+	return (char*)this->name;
+}
+
+//Para Traverse
+void Print_PlaylistName(Playlist item,size_t c){
+	printf("%ld. %s\n",c,item.name);
 }
 

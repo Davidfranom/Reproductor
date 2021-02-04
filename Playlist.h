@@ -35,7 +35,7 @@ void Playlist_Remove_front( Playlist* this );
 void Playlist_Remove_back( Playlist* this );
 void Playlist_Remove( Playlist* this );
 
-Track Playlist_Get( Playlist* this );
+Track* Playlist_Get( Playlist* this );
 
 void Playlist_Cursor_front( Playlist* this );
 void Playlist_Cursor_back( Playlist* this );
@@ -48,6 +48,10 @@ size_t Playlist_Len( Playlist* this );
 void Playlist_MakeEmpty( Playlist* this );
 void Playlist_Traverse( Playlist* this, void (*fn)( Track item,size_t c  ) );
 void Playlist_GralRemove( Playlist* this, size_t id );
-size_t Playlist_GetID(Playlist* this); 
+size_t Playlist_GetID(Playlist* this);
+
+char* Playlist_GetName(Playlist* this);
+
+void Print_PlaylistName(Playlist item,size_t c); 
 
 #endif
