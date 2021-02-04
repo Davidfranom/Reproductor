@@ -19,7 +19,7 @@ void PrintMenuPrincipal(Player* this,Playlist* that)
 {
 	printf("\nReproductor (%ld playlists)(%ld canciones)\n",Player_Len(this),Playlist_Len(that));
 	
-    printf("\n\tMenú principal\n");
+    printf("\n\tMen%c principal\n",163);
     printf("A) Lista de canciones completa\n");    //Mostraria todas las canciones de la lista principal
     printf("N) Nueva Playlist\n");                 //Crearia una nueva playlist y la almacenaria en la lista secundaria
     printf("Z) Nueva cancion\n");
@@ -39,10 +39,10 @@ void PrintMenuPlaylist(Playlist* this)
 	
 	printf("\nPlaylist: %s (%ld canciones)\n",Playlist_GetName(this),Playlist_Len(this));
 	
-    printf("\n\tMenú para Playlist\n");
-    printf("A) Agregar canción\n");       										//Agrega una canción a la playlist en la que se este trabajando
-    printf("X) Remover canción\n");       										//Quita una canción seleccionada por el usuario
-    printf("P) Reproducir canción\n");    										//Simula la reproducción de la canción ( aun falta un detalle)
+    printf("\n\tMen%c para Playlist\n",163);
+    printf("A) Agregar cancion\n");       										//Agrega una canción a la playlist en la que se este trabajando
+    printf("X) Remover canci%cn\n",162);       										//Quita una canción seleccionada por el usuario
+    printf("P) Reproducir canci%cn\n",162);    										//Simula la reproducción de la canción ( aun falta un detalle)
     //printf("H) Mostrar ayuda\n");         									//Vuelve a mostrar este menú
     //printf("T) Mostrar canciones\n");
     printf("C) Limpiar pantalla\n");
@@ -64,7 +64,7 @@ void PrintMenuCancion(Playlist* this,bool play)
 	  
 	Print_DataTrack(Playlist_Get(this));
 	
-    printf("\n\tMenú para Cancion\n");
+    printf("\n\tMen%c para Canci%cn\n",163,162);
     printf("R) Siguiente\n");       
     printf("L) Anterior\n");       
     printf("P) Pausar/Reproducir\n");    
@@ -107,7 +107,7 @@ void TestMenuCancion(Playlist* this)
             	}
             break;
             default:
-                printf("Opción invalida!\n");
+                printf("Opci%cn inv%clida!\n",162,160);
                 //PrintMenuPlaylist(this);
             break;
         }
@@ -145,7 +145,7 @@ void TestMenuPlaylist( Player* player, Playlist* this, Playlist* that) 			//Debe
             case 'A': case 'a':;   												//";" corrige el error de compilación
                                 
                 assert(!Playlist_IsEmpty(that));								//assert
-				printf("\nElija una cancion\n");
+				printf("\nElija una canci%cn\n",162);
 				
             	Playlist_Traverse(that,Print_TrackTitle);
             	printf("\ncmd > > >: ");
@@ -168,11 +168,11 @@ void TestMenuPlaylist( Player* player, Playlist* this, Playlist* that) 			//Debe
             case 'X': case 'x':
             	
                 if( Playlist_IsEmpty( this ) == true ){
-                    printf("\n¡¡¡ Error !!! , la playlist esta vacia\n");
+                    printf("\n¡¡¡ Error !!! , la playlist esta vac%ca\n",161);
                     break;
                 } else{
                     Clear();
-                    printf("\n\t Eliga la canción que sera removida:\n");
+                    printf("\n\t Eliga la canci%cn que ser%c removida:\n",162,160);
                     Playlist_Cursor_front( this );
 
                     for( size_t i = 0; i<Playlist_Len( this ); ++i ){
@@ -209,11 +209,11 @@ void TestMenuPlaylist( Player* player, Playlist* this, Playlist* that) 			//Debe
             case 'P': case 'p':
 
                 if( Playlist_IsEmpty( this ) == true ){
-                    printf("\n¡¡¡ Error !!! , la playlist esta vacia\n");
+                    printf("\n¡¡¡ Error !!! , la playlist esta vac%ca\n",161);
                     break;
                 } else{
                 	
-                	printf("\nElija una cancion\n"); 
+                	printf("\nElija una canci%cn\n",162); 
                 	Playlist_Traverse(this,Print_TrackTitle);					//Mostramos la lista de canciones en la playlist
                     					
                     size_t p = 0;
@@ -250,7 +250,7 @@ void TestMenuPlaylist( Player* player, Playlist* this, Playlist* that) 			//Debe
 				//PrintMenuPlaylist(this);
             break;
             default:
-                printf("Opción invalida!\n");
+                printf("Opci%cn inv%clida!\n",162,160);
                 //PrintMenuPlaylist(this);
             break;
         }
@@ -288,7 +288,7 @@ void TestPrincipal()
         	case 'X': case 'x':
         		assert(!Playlist_IsEmpty(playlist_gral));						//asssert
         		
-        		printf("\nElija la cancion que se va a eliminar\n");
+        		printf("\nElija la canci%cn que se va a eliminar\n",162);
             	Playlist_Traverse(playlist_gral,Print_TrackTitle);
             	printf("\ncmd > > >: ");
             	scanf("%d",&opt);
@@ -301,7 +301,7 @@ void TestPrincipal()
             	Playlist_Cursor_prev(playlist_gral);
             																	/////////////////////////
             
-            	printf("Se elimino la cancion: %s\n",Track_GetTitle(Playlist_Get(playlist_gral)));//Aqui//playlist_gral->cursor->datos.title
+            	printf("Se elimin%c la canci%cn: %s\n",162,162,Track_GetTitle(Playlist_Get(playlist_gral)));//Aqui//playlist_gral->cursor->datos.title
             	
             																
             	Player_GralRemove(player,Playlist_GetID(playlist_gral));		//Elimina la cancion de todas las playlists
@@ -379,7 +379,7 @@ void TestPrincipal()
             	//////////////////////////////
             	
             	
-            	printf("Se elimino la playlist: %s",Playlist_GetName(Player_Get(player)) );//Aqui//player->cursor->datos.name
+            	printf("Se elimin%c la playlist: %s",162,Playlist_GetName(Player_Get(player)) );//Aqui//player->cursor->datos.name
             	Player_Remove(player);               
 
             break;
@@ -404,7 +404,7 @@ void TestPrincipal()
 				//PrintMenuPrincipal(player,playlist_gral);
             break;
             default:
-                printf("Comando inválido\n");
+                printf("Comando inv%clido\n",160);
                 //PrintMenuPrincipal(player,playlist_gral);
             break;
 

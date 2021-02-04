@@ -33,7 +33,7 @@ void Track_Delete( Track** this )
 
 void Track_ChangeTitle( Track* this )
 {
-    printf("\nNombre de la cancion: ");
+    printf("\nNombre de la canci%cn: ",162);
     //fflush( stdin );
     fgets(this->title,MAX,stdin);
     fgets(this->title,MAX,stdin);
@@ -55,7 +55,7 @@ void Track_ChangePerformer( Track* this )
 
 void Track_ChangeGenre( Track* this )
 {
-    printf("Genero: ");
+    printf("G%cnero: ",130);
     //fflush( stdin );
     fgets(this->genre,MAX,stdin);
     fgets(this->genre,MAX,stdin);
@@ -66,7 +66,7 @@ void Track_ChangeGenre( Track* this )
 
 void Track_ChangeYear( Track* this )
 {
-    printf("Año: ");
+    printf("A%co: ",164);
     fflush( stdin );
     scanf("%d", &this->year );
     //printf("Año de salida: %d ", this->year );
@@ -74,7 +74,7 @@ void Track_ChangeYear( Track* this )
 
 void Track_ChangeDuration( Track* this )
 {
-    printf("Duración: ");
+    printf("Duraci%cn: ",162);
     fflush( stdin );
     scanf("%f", &this->duration );
     //printf("Tiempo de duración: %lf ", this->duration );
@@ -83,12 +83,12 @@ void Track_ChangeDuration( Track* this )
 
 void Print_DataTrack( Track* this )
 {
-    printf("\n\tDatos de la canción:\n\n");
+    printf("\n\tDatos de la canci%cn:\n\n",162);
     printf("Nombre: %s\n", this->title );
     printf("Artista: %s\n", this->performer );
-    printf("Genero: %s \n", this->genre );
-    printf("Año de salida: %d \n", this->year );
-    printf("Tiempo de duración: %0.2f min \n\n", this->duration );
+    printf("G%cnero: %s \n",130, this->genre );
+    printf("A%co de salida: %d \n",164, this->year );
+    printf("Tiempo de duraci%cn: %0.2f min \n\n",162, this->duration );
 }
 
 char* Track_GetTitle(Track* this){
