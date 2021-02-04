@@ -135,35 +135,41 @@ void TestMenuPlaylist( Player* player, Playlist* this, Playlist* that) 			//Debe
         switch( cmd )
         {
         	case 'C': case 'c': Clear(); 
-			//*PrintMenuPlaylist(this);
+				//*PrintMenuPlaylist(this);
 			break;
         	case 'S': case 's':  
 			break;
             case 'H': case 'h': 
-			//PrintMenuPlaylist(this);
+				//PrintMenuPlaylist(this);
 			break;
             case 'A': case 'a':;   												//";" corrige el error de compilación
                                 
-                assert(!Playlist_IsEmpty(that));								//assert
-				printf("\nElija una canci%cn\n",162);
 				
-            	Playlist_Traverse(that,Print_TrackTitle);
-            	printf("\ncmd > > >: ");
-            	scanf("%d",&opt);
+				if( Playlist_IsEmpty(that)){
+                    printf("\n¡¡¡ Error !!! , la playlist esta vac%ca\n",161);
+                    break;
+                } else{
+				
+					printf("\nElija una canci%cn\n",162);
+				
+            		Playlist_Traverse(that,Print_TrackTitle);
+            		printf("\ncmd > > >: ");
+            		scanf("%d",&opt);
             	
             																	//coloca al cursor en opt
-            	Playlist_Cursor_front(that);
-            	for(size_t i=0;i<opt;++i){
-            		Playlist_Cursor_next(that);
-            	}
-            	Playlist_Cursor_prev(that);
+            		Playlist_Cursor_front(that);
+            		for(size_t i=0;i<opt;++i){
+            			Playlist_Cursor_next(that);
+            		}
+            		Playlist_Cursor_prev(that);
             																	///////////////////////////////////
             	
-            	Track* v1=Playlist_Get(that);
-                Playlist_Insert_back( this, v1 ); 
-				printf("\nInsertando %s en %s...\n",Track_GetTitle(v1),Playlist_GetName(this)); //v1.title
+            		Track* v1=Playlist_Get(that);
+                	Playlist_Insert_back( this, v1 ); 
+					printf("\nInsertando %s en %s...\n",Track_GetTitle(v1),Playlist_GetName(this)); //v1.title
                 
-                //Print_DataTrack( v1 );
+                	//Print_DataTrack( v1 );
+                }	
             break;
             case 'X': case 'x':
             	
@@ -286,27 +292,31 @@ void TestPrincipal()
         switch( cmd )
         {
         	case 'X': case 'x':
-        		assert(!Playlist_IsEmpty(playlist_gral));						//asssert
         		
-        		printf("\nElija la canci%cn que se va a eliminar\n",162);
-            	Playlist_Traverse(playlist_gral,Print_TrackTitle);
-            	printf("\ncmd > > >: ");
-            	scanf("%d",&opt);
+        		if(Playlist_IsEmpty(playlist_gral)){
+                    printf("\n¡¡¡ Error !!! , La lista est%c vac%ca.\n",160,161);
+                    break;
+                } else{
+        		
+        			printf("\nElija la canci%cn que se va a eliminar\n",162);
+            		Playlist_Traverse(playlist_gral,Print_TrackTitle);
+            		printf("\ncmd > > >: ");
+            		scanf("%d",&opt);
             	
             																	//Coloca al cursor en opt
-            	Playlist_Cursor_front(playlist_gral);
-            	for(size_t i=0;i<opt;++i){
-            		Playlist_Cursor_next(playlist_gral);
-            	}
-            	Playlist_Cursor_prev(playlist_gral);
+            		Playlist_Cursor_front(playlist_gral);
+            		for(size_t i=0;i<opt;++i){
+            			Playlist_Cursor_next(playlist_gral);
+            		}
+            		Playlist_Cursor_prev(playlist_gral);
             																	/////////////////////////
             
-            	printf("Se elimin%c la canci%cn: %s\n",162,162,Track_GetTitle(Playlist_Get(playlist_gral)));//Aqui//playlist_gral->cursor->datos.title
+            		printf("Se elimin%c la canci%cn: %s\n",162,162,Track_GetTitle(Playlist_Get(playlist_gral)));//Aqui//playlist_gral->cursor->datos.title
             	
             																
-            	Player_GralRemove(player,Playlist_GetID(playlist_gral));		//Elimina la cancion de todas las playlists
-            	Playlist_Remove(playlist_gral);									//Elimina la cancion de la lista general
-            	
+            		Player_GralRemove(player,Playlist_GetID(playlist_gral));		//Elimina la cancion de todas las playlists
+            		Playlist_Remove(playlist_gral);									//Elimina la cancion de la lista general
+            	}
         	break;
         	case 'Z': case 'z':; 
         		Track *v2 = Track_New(id);
@@ -332,12 +342,17 @@ void TestPrincipal()
 			break;
 			*/
             case 'A': case 'a':
-                assert(!Playlist_IsEmpty(playlist_gral));						//assert
                 
-				printf("\nTodas las canciones: \n\n");
-                Playlist_Traverse(playlist_gral,Print_TrackTitle);
+                if(Playlist_IsEmpty(playlist_gral)){
+                    printf("\n¡¡¡ Error !!! , La lista est%c vac%ca.\n",160,161);
+                    break;
+                } else{
                 
-                //PrintMenuPrincipal(player,playlist_gral);
+					printf("\nTodas las canciones: \n\n");
+                	Playlist_Traverse(playlist_gral,Print_TrackTitle);
+                
+                	//PrintMenuPrincipal(player,playlist_gral);
+                }
             break;
             case 'N': case 'n':
                 printf("\nNombre del Playlist: ");
@@ -345,9 +360,9 @@ void TestPrincipal()
                 char name[MAX];
                 
                 //fflush( stdin );
-                fgets(name,MAX,stdin);
+                //fgets(name,MAX,stdin);
     			fgets(name,MAX,stdin);
-                //scanf("%[^\n]",name);
+                scanf("%[^\n]",name);
                 //gets(name);
                 
                 Playlist* p1 = Playlist_New( name );
@@ -362,46 +377,56 @@ void TestPrincipal()
 
             case 'D': case 'd':
                 //Funcion eliminar playlist's
-                assert(!Player_IsEmpty(player));								//assert
                 
-                printf("\nElija una playlist\n");           	
+                if(Player_IsEmpty(player)){
+                    printf("\n¡¡¡ Error !!! , No se ha creado una playlist.\n");
+                    break;
+                } else{
+                
+                	printf("\nElija una playlist\n");           	
             	
-            	Player_Traverse(player,Print_PlaylistName);
-            	printf("\ncmd > > >: ");
-            	scanf("%d",&opt);
+            		Player_Traverse(player,Print_PlaylistName);
+            		printf("\ncmd > > >: ");
+            		scanf("%d",&opt);
             	
-            	//Coloca al cursor en opt
-            	Player_Cursor_front(player);
-            	for(size_t i=0;i<opt;++i){
-            		Player_Cursor_next(player);
-            	}
-            	Player_Cursor_prev(player);
-            	//////////////////////////////
+            		//Coloca al cursor en opt
+            		Player_Cursor_front(player);
+            		for(size_t i=0;i<opt;++i){
+            			Player_Cursor_next(player);
+            		}
+            		Player_Cursor_prev(player);
+            		//////////////////////////////
             	
             	
-            	printf("Se elimin%c la playlist: %s",162,Playlist_GetName(Player_Get(player)) );//Aqui//player->cursor->datos.name
-            	Player_Remove(player);               
+            		printf("Se elimin%c la playlist: %s",162,Playlist_GetName(Player_Get(player)) );//Aqui//player->cursor->datos.name
+            		Player_Remove(player);   
+				}
 
             break;
             case 'R': case 'r':
-            	assert(!Player_IsEmpty(player));								//assert
             	
-            	printf("\nElija una playlist\n");         	
-            	Player_Traverse(player,Print_PlaylistName);
-            	printf("\ncmd > > >: ");
-            	scanf("%d",&opt);
+            	if(Player_IsEmpty(player)){
+                    printf("\n¡¡¡ Error !!! , No se ha creado una playlist.\n");
+                    break;
+                } else{
             	
-            	//Coloca el cursor en la posicion opt
-            	Player_Cursor_front(player);
-            	for(size_t i=0;i<opt;++i){
+            		printf("\nElija una playlist\n");         	
+            		Player_Traverse(player,Print_PlaylistName);
+            		printf("\ncmd > > >: ");
+            		scanf("%d",&opt);
+            	
+            		//Coloca el cursor en la posicion opt
+            		Player_Cursor_front(player);
+            		for(size_t i=0;i<opt;++i){
             		Player_Cursor_next(player);
-            	}
-            	Player_Cursor_prev(player);
-            	/////////////////////////////////////////
+            		}
+            		Player_Cursor_prev(player);
+            		/////////////////////////////////////////
             	
-                TestMenuPlaylist(player,Player_Get(player),playlist_gral);//Aqui//&player->cursor->datos            
+                	TestMenuPlaylist(player,Player_Get(player),playlist_gral);//Aqui//&player->cursor->datos            
                 
-				//PrintMenuPrincipal(player,playlist_gral);
+					//PrintMenuPrincipal(player,playlist_gral);
+				}
             break;
             default:
                 printf("Comando inv%clido\n",160);

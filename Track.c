@@ -35,9 +35,9 @@ void Track_ChangeTitle( Track* this )
 {
     printf("\nNombre de la canci%cn: ",162);
     //fflush( stdin );
+    //fgets(this->title,MAX,stdin);
     fgets(this->title,MAX,stdin);
-    fgets(this->title,MAX,stdin);
-    //scanf("%[^\n]",this->title);
+    scanf("%[^\n]",this->title);
     //gets(this->title);
     //printf("Nuevo nombre: %s ", this->title );
 }
@@ -46,9 +46,9 @@ void Track_ChangePerformer( Track* this )
 {
     printf("Artista: ");
     //fflush( stdin );
+    //fgets(this->performer,MAX,stdin);
     fgets(this->performer,MAX,stdin);
-    fgets(this->performer,MAX,stdin);
-    //scanf("%[^\n]",this->performer);
+    scanf("%[^\n]",this->performer);
     //gets( this->performer );
     //printf("Nombre del artista: %s ", this->performer );
 }
@@ -57,9 +57,9 @@ void Track_ChangeGenre( Track* this )
 {
     printf("G%cnero: ",130);
     //fflush( stdin );
+    //fgets(this->genre,MAX,stdin);
     fgets(this->genre,MAX,stdin);
-    fgets(this->genre,MAX,stdin);
-    //scanf("%[^\n]",this->genre);
+    scanf("%[^\n]",this->genre);
     //gets( this->genre );
     //printf("Nombre del genero: %s ", this->genre );
 }
