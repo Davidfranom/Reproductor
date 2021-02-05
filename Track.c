@@ -11,7 +11,7 @@ Track* Track_New(size_t id)
         //Track_ChangePerformer( song );
         //Track_ChangeGenre(     song );
         //Track_ChangeYear(      song );
-        //Track_ChangeDuration(  song );
+        Track_ChangeDuration(  song );
     } else{
         free( song );
         song = NULL;
@@ -76,7 +76,7 @@ void Track_ChangeDuration( Track* this )
 {
     printf("Duración: ");
     fflush( stdin );
-    scanf("%f", &this->duration );
+    scanf("%d", &this->duration );
     //printf("Tiempo de duración: %lf ", this->duration );
 }
 
@@ -88,14 +88,14 @@ void Print_DataTrack( Track* this )
     printf("Artista: %s\n", this->performer );
     printf("Género: %s \n", this->genre );
     printf("Año de salida: %d \n", this->year );
-    printf("Tiempo de duración: %0.2f min \n\n", this->duration );
+    printf("Tiempo de duración: %d min \n\n", this->duration );
 }
 
 char* Track_GetTitle(Track* this){
 	assert(this);
 	return (char*)this->title;
 }
-float Track_GetDuration(Track* this){
+int Track_GetDuration(Track* this){
 	assert(this);
 	return this->duration;
 }
@@ -103,6 +103,25 @@ float Track_GetDuration(Track* this){
 //Para Traverse
 void Print_TrackTitle(Track item,size_t c){
 	printf("%ld. %s\n",c,item.title);
+}
+
+bool validar(char* this){
+    bool res=true;
+    size_t c=0;
+    while(this[c]!='\0'){
+        int i=isdigit(this[c]);
+        c++;
+       
+        //printf("%d\n",i);
+    
+        if(i==0){
+            res=false;
+            break;
+        }
+    
+    } 
+    
+    return res;
 }
 
 

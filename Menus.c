@@ -1,24 +1,5 @@
 #include "Menus.h"
 
-bool validar(char* this){
-    bool res=true;
-    size_t c=0;
-    while(this[c]!='\0'){
-        int i=isdigit(this[c]);
-        c++;
-       
-        //printf("%d\n",i);
-    
-        if(i==0){
-            res=false;
-            break;
-        }
-    
-    } 
-    
-    return res;
-}
-
 #define LIN
 void Clear()
 {
@@ -44,7 +25,8 @@ void PrintMenuPrincipal(Player* this,Playlist* that)
 	printf("D) Eliminar Playlist\n");              //Eliminaria una playlist contenida en la lista secundaria
     printf("X) Eliminar canción\n");
 	printf("R) Abrir Playlist\n");            //Mostraria un menu con opciones para una playlist
-    printf("C) Limpiar pantalla\n");
+    
+	printf("C) Limpiar pantalla\n");
 	printf("E) Salir\n");                          //Salimos del programa de manera defenitiva
 
     //printf("H) Mostrar ayuda\n ");                  //Vuelve a mostrar este mensaje
@@ -60,8 +42,9 @@ void PrintMenuPlaylist(Playlist* this)
     printf("\n\tMenú para Playlist\n");
     printf("A) Agregar canción\n");       										//Agrega una canción a la playlist en la que se este trabajando
     printf("X) Remover canción\n");       										//Quita una canción seleccionada por el usuario
-    printf("P) Reproducir canción\n");    										//Simula la reproducción de la canción ( aun falta un detalle)
-    //printf("H) Mostrar ayuda\n");         									//Vuelve a mostrar este menú
+	printf("P) Reproducir canción\n");    										//Simula la reproducción de la canción ( aun falta un detalle)
+    printf("O) Optimizar Playlist\n");
+	//printf("H) Mostrar ayuda\n");         									//Vuelve a mostrar este menú
     //printf("T) Mostrar canciones\n");
     printf("C) Limpiar pantalla\n");
     printf("S) Salir\n");                 										//Salimos de este menú y regresamos al principal
@@ -153,6 +136,33 @@ void TestMenuPlaylist( Player* player, Playlist* this, Playlist* that) 			//Debe
 
         switch( cmd )
         {
+        	case 'O': case 'o':
+        		if(Playlist_IsEmpty(that)){
+                    printf("\n¡¡¡ %s vacío. Capture primero los datos de algunas canciones !!! \n",Playlist_GetName(that));
+                    break;
+                } else{
+                	
+                	Playlist_MakeEmpty(this);
+                	//printf("Len: %ld",Playlist_Len(this));
+                	printf("\nOptimización de playlist\n");
+        			printf("\nIngrase un límite de tiempo en minutos: \n");
+        			printf("\ncmd > > >: ");
+            		scanf("%s",optChar);
+            	
+            		if(validar(optChar)){
+            			opt=atoi(optChar);
+            			if(opt<1){
+            				printf("Opción inválida!\n");
+            				break;
+            			}
+            		} else{
+            			printf("Opción inválida!\n");
+            			break;
+            		}
+        		
+        			backtracking(that,this,opt);
+                }
+        	break;
         	case 'C': case 'c': Clear(); 
 				//*PrintMenuPlaylist(this);
 			break;

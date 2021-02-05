@@ -9,3 +9,6 @@ main.o
 CDLL.o
 Project1.layout
 Project1.exe
+Stack.o
+Array.o
+bt.o

@@ -28,7 +28,8 @@ Player* Player_New()
 
 void Player_Delete( Player** this )
 {
-	for(size_t i = 0; i < (*this)->len ;++i){
+	size_t c=(*this)->len;
+	for(size_t i = 0; i < c ;++i){
 		Node_2* tmp = (*this)->first->next;
 		free((*this)->first);
 		(*this)->first = tmp;
@@ -196,7 +197,8 @@ size_t Player_Len( Player* this )
 
 void Player_MakeEmpty( Player* this )
 {
-	for(size_t i=0; i<this->len; ++i){
+	size_t c=this->len;
+	for(size_t i=0; i<c; ++i){
 		Player_Remove_front(this);
 	}
 }
@@ -208,8 +210,8 @@ void Player_Traverse( Player* this, void (*fn)( Playlist item, size_t c ) ) // s
 	size_t cont=0;
 	Node_2* t = this->first;
 
-
-   for(size_t i=0;i<Player_Len(this);++i){
+	size_t c=this->len;
+   for(size_t i=0;i<c;++i){
    		cont++;
 		fn( t->datos,cont );
 		t = t->next;
@@ -222,8 +224,9 @@ void Player_GralRemove( Player* this, size_t id )
 {
 	if( NULL == this ){ return; }
 	Node_2* t = this->first;
-
-   for(size_t i=0;i<Player_Len(this);++i){
+	
+	size_t c=this->len;
+   for(size_t i=0;i<c;++i){
    		
 		Playlist_GralRemove(&t->datos,id);
 		t = t->next;

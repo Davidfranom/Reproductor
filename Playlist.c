@@ -30,7 +30,8 @@ Playlist* Playlist_New(char name[])
 
 void Playlist_Delete( Playlist** this )
 {
-	for(size_t i = 0; i < (*this)->len ;++i){
+	size_t c=(*this)->len;
+	for(size_t i = 0; i < c ;++i){
 		Node* tmp = (*this)->first->next;
 		free((*this)->first);
 		(*this)->first = tmp;
@@ -198,7 +199,8 @@ size_t Playlist_Len( Playlist* this )
 
 void Playlist_MakeEmpty( Playlist* this )
 {
-	for(size_t i=0; i<this->len; ++i){
+	size_t c=this->len;
+	for(size_t i=0; i<c; ++i){
 		Playlist_Remove_front(this);
 	}
 }
@@ -210,8 +212,8 @@ void Playlist_Traverse( Playlist* this, void (*fn)( Track item,size_t c ) ) // s
 	size_t cont=0;
 	Node* t = this->first;
 
-
-   for(size_t i=0;i<Playlist_Len(this);++i){
+	size_t c=Playlist_Len(this);
+   for(size_t i=0;i<c;++i){
    		cont++;
 		fn( t->datos,cont );
 		t = t->next;
@@ -225,7 +227,8 @@ void Playlist_GralRemove( Playlist* this, size_t id )
 	if( NULL == this ){ return; }
 	Node* t = this->first;
 
-   for(size_t i=0;i<Playlist_Len(this);++i){
+	size_t c=Playlist_Len(this);
+   for(size_t i=0;i<c;++i){
 
 		if (t->datos.id==id){
 			this->cursor=t;

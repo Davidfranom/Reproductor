@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
+#include <stdbool.h>
+#include <ctype.h>
 
 typedef struct Track
 {
@@ -14,10 +16,11 @@ typedef struct Track
 	char  performer[ MAX ];
 	char  genre[ MAX ];
 	int   year;
-	float duration;
+	int duration;
 
 } Track;
 
+bool 	validar(char* this);
 Track*  Track_New(size_t id);
 void    Track_Delete(           Track** this );
 void    Track_ChangeTitle(      Track* this );    //Funciones particulares
@@ -28,7 +31,7 @@ void    Track_ChangeDuration(   Track* this );
 void    Print_DataTrack(        Track* this );
 
 char*   Track_GetTitle(Track* this);
-float Track_GetDuration(Track* this);
+int Track_GetDuration(Track* this);
 
 void Print_TrackTitle(Track item,size_t c);
 
