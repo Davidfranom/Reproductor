@@ -1,0 +1,3 @@
+Instrucción de compilación:
+
+gcc-Wall-std=c99-o Reproductor.out Array.c bt.c Stack.c Track.c Playlist.c Player.c Menus.c main.c
