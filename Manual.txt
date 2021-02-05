@@ -1,0 +1,110 @@
+Existen 3 menús en el programa:
+
+1. Menú Principal: Contiene las funciones más generales. Muestra la cantidad total de playlists y canciones. 
+2. Menú de Playlist: Contiene las funciones que se pueden realizar dentro de una playlist. Muestra el nombre y número de canciones de la playlist.
+3. Menú de canción: Contiene las funciones que se pueden realizar mientras se reproduce una canción. Muestra los datos y el estado de la canción.
+
+-Menú principal
+
+Reproductor (0 playlists)(0 canciones)
+
+        Men· principal
+A) Lista de canciones completa
+N) Nueva Playlist
+Z) Nueva canci¾n
+D) Eliminar Playlist
+X) Eliminar canci¾n
+R) Abrir Playlist
+C) Limpiar pantalla
+E) Salir
+
+	- A) 	Muestra la lista de todas las canciones agregadas (banco de canciones).
+		Muestra un aviso si es que no se han agregado canciones aún y regresa al menú principal.
+	
+	- N)	Crea una nueva Playlist, solicita el nombre que se le ha de asignar.
+
+	- Z)	Crea una nueva canción, solicita: título, intérprete, género, año y duración (minutos entero)
+		Añade la canción al banco de canciones.
+
+	- D)	Muestra una lista de todas las Playlist creadas y solicita al usuario que ingrese el índice de la que se quiera eliminar.
+		Elimina la playlist seleccionada.
+		Muestra un aviso en caso de que no se hayan creado playlists aún.
+
+	- X)	Muestra una lista de todas las canciones capturadas y solicita al usuario que ingrese el índice de la que se quiera eliminar.
+		Elimina la canción seleccionada del banco de canciones y de todas las playlists que la contengan.
+
+	- R)	Muestra una lista de todas las Playlist creadas y solicita al usuario que ingrese el índice de aquella ala que se quiere acceder.
+		Abre el segundo menú (Playlist).
+		Muestra un aviso si no hay playlists para acceder.
+
+	- C)	Limpia la pantalla y muestra el menú nuevamente.
+
+	- E)	Termina el programa.
+
+- Menú de Playlist
+
+Playlist: Nombre (0 canciones)
+
+        Men· para Playlist
+A) Agregar canci¾n
+X) Remover canci¾n
+P) Reproducir canci¾n
+O) Optimizar Playlist
+C) Limpiar pantalla
+S) Salir
+
+cmd > > >:
+
+	- A) 	Muestra la lista de todas las canciones agregadas (banco de canciones).
+		Solicita al usuario que ingrese el índice de la canción que se quiera agregar a la playlist actual.
+		Muestra un aviso si es que no se han agregado canciones aún y regresa al menú de Playlist.
+	
+	- X)	Muestra una lista de todas las canciones en la Playlist y solicita al usuario que ingrese el índice de la que se quiera eliminar.
+		
+
+	- P)	Muestra una lista de todas las canciones en la Playlist y solicita al usuario que ingrese el índice de aquella a la que se quiera acceder.
+		Abre el Menú de Canciión.
+		Muestra un aviso si la playlist está vacía y regresa al menú de Playlist.
+
+	- O)	Optimiza la playlist actual con el mayor número de canciones para un cierto límite de minutos. Si no encuentra una solución exacta 
+		busca la solución más próxima.
+		Solicita al usuario el límite en minutos (entero).
+		Muestra el número de canciones añadidas, el tiempo total y la lista de dichas canciones.
+
+	- C)	Limpia la pantalla y muestra el menú nuevamente.
+
+	- S)	Regresa al Menú principal.
+
+-Menú de Canción
+
+Reproduciendo: Título
+
+        Datos de la canci¾n:
+
+Nombre: Título
+Artista: Intérprete
+GÚnero: género
+A±o de salida: 2021
+Tiempo de duraci¾n: 5 min
+
+
+        Men· para Canci¾n
+R) Siguiente
+L) Anterior
+P) Pausar/Reproducir
+C) Limpiar pantalla
+S) Salir
+
+cmd > > >:
+
+	- R) 	Cambia a la siguiente canción dentro de la playlist
+		Si no hay más canciones delante regresa a la primer canción de la playlist.
+		
+	- L) 	Cambia a la anterior canción dentro de la playlist
+		Si no hay más canciones detrás regresa a la última canción de la playlist.
+
+	- P)	Alterna entre el estado Reproduciendo y En pausa 
+
+	- C)	Limpia la pantalla y muestra el menú nuevamente.
+
+	- S)	Regresa al Menú de Playlist.
