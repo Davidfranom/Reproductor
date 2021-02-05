@@ -106,6 +106,8 @@ void Track_ChangeGenre( Track* this )
 */
 void Track_ChangeYear( Track* this )
 {
+	printf("Año: ");
+    fflush( stdin );
     char optChar[MAX];
     scanf("%s", optChar );
 
@@ -127,6 +129,8 @@ void Track_ChangeYear( Track* this )
 */
 void Track_ChangeDuration( Track* this )
 {
+	printf("Duración: ");
+    fflush( stdin );
     char optChar[MAX];
     scanf("%s", optChar );
 
