@@ -1,13 +1,13 @@
 /**
  * @file Player.h
  *
- * @brief Contiene las declaraciones de las funciones para el TAD Player que es una lista 
- * 
+ * @brief Contiene las declaraciones de las funciones para el TAD Player que es una lista
  *
- * Player es un TAD que sirve de lista enlazada, 
+ *
+ * Player es un TAD que sirve de lista enlazada,
  * cuyos nodos contienen como elemento de datos otra lista de distinto tipo.
  *
- * @autores David Ortiz
+ * @author David Ortiz-> Equipo 1 EDA 1
  * @date 04/02/21
  * @version 1
  */
@@ -39,29 +39,28 @@ typedef struct Player{
 
 } Player;
 
-Player* Player_New();
-void Player_Delete( Player** this );
+Player*    Player_New();
+void       Player_Delete( Player** this );
+void       Player_Insert_front( Player* this, Playlist* x );
+void       Player_Insert_back( Player* this, Playlist* x );
+void       Player_Insert( Player* this, Playlist* x );
 
-void Player_Insert_front( Player* this, Playlist* x );
-void Player_Insert_back( Player* this, Playlist* x );
-void Player_Insert( Player* this, Playlist* x );
+void       Player_Remove_front( Player* this );
+void       Player_Remove_back( Player* this );
+void       Player_Remove( Player* this );
 
-void Player_Remove_front( Player* this );
-void Player_Remove_back( Player* this );
-void Player_Remove( Player* this );
+Playlist*  Player_Get( Player* this );
 
-Playlist* Player_Get( Player* this );
+void       Player_Cursor_front( Player* this );
+void       Player_Cursor_back( Player* this );
+void       Player_Cursor_next( Player* this );
+void       Player_Cursor_prev( Player* this );
 
-void Player_Cursor_front( Player* this );
-void Player_Cursor_back( Player* this );
-void Player_Cursor_next( Player* this );
-void Player_Cursor_prev( Player* this );
+bool       Player_IsEmpty( Player* this );
+size_t     Player_Len( Player* this );
 
-bool Player_IsEmpty( Player* this );
-size_t Player_Len( Player* this );
-
-void Player_MakeEmpty( Player* this );
-void Player_Traverse( Player* this, void (*fn)( Playlist item, size_t c  ) );
-void Player_GralRemove( Player* this, size_t id ); 
+void       Player_MakeEmpty( Player* this );
+void       Player_Traverse( Player* this, void (*fn)( Playlist item, size_t c  ) );
+void       Player_GralRemove( Player* this, size_t id );
 
 #endif

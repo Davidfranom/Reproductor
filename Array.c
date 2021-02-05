@@ -2,17 +2,19 @@
  * @file Array.c
  *
  * @brief Contiene las definiciones de las funciones para el TAD Array que es una arreglo
- * 
  *
- * Array es un TAD que sirve de contenedor, 
+ *
+ * Array es un TAD que sirve de contenedor,
  * tiene como estructura subyacente a un arreglo de enteros
  *
- * @autores Francisco Rodríguez
- * @date 
- * @version 
+ * @author Francisco Rodríguez
+ * @date
+ * @version
  */
 
+
 #include "Array.h"
+
 
  /**
  * @brief Crea un nuevo Array
@@ -27,11 +29,12 @@ Array* Array_new( size_t max_len )
 {
    Array* a = (Array*) malloc( sizeof( Array ) );/*! a es el TAD Array creado de forma dinámica*/
    if( a ){
-      a->array = (int*) malloc( max_len * sizeof( int ) ); 
+      a->array = (int*) malloc( max_len * sizeof( int ) );
       a->len = max_len;
    }
    return a;
 }
+
 
  /**
  * @brief Devuelve la memoria de un Array
@@ -50,6 +53,7 @@ void Array_delete( Array** this )
    *this = NULL;
 }
 
+
 /**
  * @brief Inserta un elemento en cierta posición del Array
  *
@@ -67,6 +71,7 @@ void Array_set( Array* this, size_t loc, int val )
    this->array[ loc ] = val;
 }
 
+
 /**
  * @brief Devuelve el elemento del Array de cierta posicion
  *
@@ -83,6 +88,7 @@ int Array_get( Array* this, size_t loc )
 
    return this->array[ loc ];
 }
+
 
 /**
  * @brief Devuelve la cantidad de elementos en Array

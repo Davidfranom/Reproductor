@@ -1,38 +1,9 @@
-/*Copyright (C) 
- * 2018 - eda1 dot fiunam at yahoo dot com dot mx
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
- */
-
-/* 2020-2 */
-
-/* 1. Cambie el nombre de este archivo a cambio_best.c
- * 2. Compile con:
- *    gcc -Wall -std=c99 -osalida.out cambio_best. Stack.c Array.c
- * 3. Ejecute con:
- *    ./salida.out
- */
- 
-/* 04/02/2020*/
-
-/* 1. Se adaptaron el archivo y las funciones para usarse como módulo
- * 2. El algoritmo ahora optimiza sin repetición y a la mayor cantidad de elementos
- * 3. Si no encuentra una solución, encuentra la más próxima de manera recursiva
- * @autores David Ortiz
- * @date 04/02/2020
- * @version 1
+/** 1. Se adaptaron el archivo y las funciones para usarse como módulo
+ *  2. El algoritmo ahora optimiza sin repetición y a la mayor cantidad de elementos
+ *  3. Si no encuentra una solución, encuentra la más próxima de manera recursiva
+ *  @author David Ortiz
+ *  @date 04/02/2020
+ *  @version 1
  */
 
 
@@ -65,7 +36,7 @@ bool es_solucion (int p, int acum)
 }
 
 /**
- * @brief Realiza las combinaciones con los distintos candidatos de forma 
+ * @brief Realiza las combinaciones con los distintos candidatos de forma
  * recursiva hasta que encuentra una solución o termina con ellos.
  *
  * @param candidatos una referencia al contenedor de candidatos (Array)
@@ -81,7 +52,7 @@ bool es_solucion (int p, int acum)
 void bt( Array* candidatos, Stack* solucion,Stack* posicion, int p, int* acum, Stack* best,Stack* b_posicion,size_t opt )
 {
 	for(size_t x=opt;x<(Array_len(candidatos));++x){
-		opt=x+1; 
+		opt=x+1;
 		if (es_factible(Array_get(candidatos,x),p,*acum)){
 			Stack_Push(solucion,Array_get(candidatos,x));
 			Stack_Push(posicion,x);
@@ -122,7 +93,7 @@ int cambio( Array* candidatos, Stack* solucion,Stack* posicion, int p )
  	int acum = 0; /*! Acumulado de la solución*/
  	size_t opt=0; /*! opt inicializa la funcion recursiva y aumenta en cada iteración, de esta manera se evita la repetición de candidatos*/
  	bt( candidatos, solucion,posicion, p, &acum, best,b_posicion,opt);
- 	
+
 	Stack_Copy(solucion,best);
 	Stack_Copy(posicion,b_posicion);
 	return Stack_Len(solucion);
@@ -146,7 +117,7 @@ int cambio( Array* candidatos, Stack* solucion,Stack* posicion, int p )
 void backtracking(Playlist* playlist_gral,Playlist* this,int limit)
 {
    Array* candidatos = Array_new( Playlist_Len(playlist_gral) ); /*! Se crea un contenedor para los candidatos a partir del tamaño de una lista*/
-   
+
 	Playlist_Cursor_front(playlist_gral);
 	for(size_t i=0;i<Playlist_Len(playlist_gral);++i){
 		Array_set( candidatos, i, Track_GetDuration(Playlist_Get(playlist_gral)) );
@@ -156,13 +127,13 @@ void backtracking(Playlist* playlist_gral,Playlist* this,int limit)
 	int p = limit; /*! Es el problema*/
 
    Stack* solucion = Stack_New( p );
-   Stack* posicion = Stack_New(p); 
-	
+   Stack* posicion = Stack_New(p);
+
 
    int num_canciones = cambio( candidatos, solucion,posicion, p ); /*! Numero de elementos en la solucion*/
 
    if( num_canciones > 0 ){
-   	
+
 		printf("\nPlaylist %s optimizada\n",Playlist_GetName(this));
       printf( "(%d) canciones: ", num_canciones );
 		int tot=0; /*! El acumulado de la solución*/
@@ -170,7 +141,7 @@ void backtracking(Playlist* playlist_gral,Playlist* this,int limit)
           tot+=Stack_Pop( solucion );
       }
       printf("%d minutos\n",tot);
-      
+
       while( not Stack_IsEmpty( posicion ) ){
       	//Coloca al cursor en posicion
       	Playlist_Cursor_front(playlist_gral);
@@ -178,21 +149,21 @@ void backtracking(Playlist* playlist_gral,Playlist* this,int limit)
         for(size_t i=0;i<pos;++i){
             Playlist_Cursor_next(playlist_gral);
         }
-    
+
         Playlist_Insert_back( this, Playlist_Get(playlist_gral) );
       }
       Playlist_Traverse(this,Print_TrackTitle);
 
       printf( "\n" );
 
-   } else{ 
-   		
+   } else{
+
    		if(p>0){
    			p--;
    			backtracking (playlist_gral,this,p);
    		} else{
-   			printf ("No se encontró ninguna solució\n"); 
-   		}	
+   			printf ("No se encontró ninguna solució\n");
+   		}
    }
 
    Array_delete( &candidatos );

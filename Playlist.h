@@ -7,7 +7,7 @@
  *   llamado Playlist el cual sirve como un contenedor de canciones enlazadas
  *   una con otra; estan todas las funciones con las cuales trabaja este TAD
  *
- * @author Equipo 1 EDA 1
+ * @author Daniel Gonzalez -> Equipo 1 EDA 1
  *
  * @date 04/02/2021
  *

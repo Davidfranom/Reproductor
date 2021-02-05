@@ -1,16 +1,17 @@
 /**
  * @file Player.c
  *
- * @brief Contiene las funciones para el TAD Player que es una lista 
- * 
+ * @brief Contiene las funciones para el TAD Player que es una lista
  *
- * Player es un TAD que sirve de lista enlazada, 
+ *
+ * Player es un TAD que sirve de lista enlazada,
  * cuyos nodos contienen como elemento de datos otra lista de distinto tipo.
  *
- * @autores David Ortiz
+ * @author David Ortiz
  * @date 04/02/21
  * @version 1
  */
+
 #include "Player.h"
 
  /**
@@ -33,9 +34,10 @@ static Node_2* newNode_2( Playlist* x )
 	return n;
 }
 
+
 /**
  * @brief Crea una lista doblemente enlazada
- * 
+ *
  * @return Una referencia a la nueva lista
  * @post Una lista existente en el heap
  */
@@ -52,6 +54,7 @@ Player* Player_New()
 	}
 	return lista;
 }
+
 
  /**
  * @brief Devuelve la memoria de la lista y todos sus nodos
@@ -72,6 +75,7 @@ void Player_Delete( Player** this )
 	free(*this);
 	*this=NULL;
 }
+
 
 /**
  * @brief Inserta un elemento a la derecha del cursor.
@@ -104,6 +108,7 @@ void Player_Insert( Player* this, Playlist* x )
 	++this->len;
 }
 
+
 /**
  * @brief Inserta un elemento a la izquierda del first.
  *
@@ -130,6 +135,7 @@ void Player_Insert_front( Player* this, Playlist* x )
 
 }
 
+
 /**
  * @brief Inserta un elemento a la derecha del last.
  *
@@ -155,6 +161,7 @@ void Player_Insert_back( Player* this, Playlist* x )
 	++this->len;
 
 }
+
 
 /**
  * @brief Remueve el elemento apuntado por el cursor
@@ -189,6 +196,7 @@ void Player_Remove( Player* this )
 	}
 }
 
+
 /**
  * @brief Remueve el elemento al frente de la lista.
  *
@@ -215,6 +223,7 @@ void Player_Remove_front( Player* this )
 	--this->len;
 }
 
+
 /**
  * @brief Remueve el elemento al fondo de la lista.
  *
@@ -240,6 +249,7 @@ void Player_Remove_back( Player* this )
 	--this->len;
 }
 
+
 /**
  * @brief Devuelve una referencia al valor apuntado por el cursor.
  *
@@ -247,11 +257,12 @@ void Player_Remove_back( Player* this )
  *
  * @return El valor apuntado por el cursor
  */
-Playlist* Player_Get( Player* this ) 
+Playlist* Player_Get( Player* this )
 {
 	assert( this->cursor );
 	return &this->cursor->datos;
 }
+
 
 /**
  * @brief Manda al cursor al inicio de la lista
@@ -263,6 +274,7 @@ void Player_Cursor_front( Player* this )
     assert( this->cursor );
 	this->cursor = this->first;
 }
+
 
 /**
  * @brief Coloca al cursor en last
@@ -277,6 +289,7 @@ void Player_Cursor_back( Player* this )
 	this->cursor = this->last;
 }
 
+
 /**
  * @brief Coloca al cursor en su elemento a la derecha
  *
@@ -290,6 +303,7 @@ void Player_Cursor_next( Player* this )
 	this->cursor=this->cursor->next;
 }
 
+
 /**
  * @brief Coloca al cursor en su elemento a la izquierda
  *
@@ -302,6 +316,7 @@ void Player_Cursor_prev( Player* this )
 	assert(this->cursor);
 	this->cursor=this->cursor->prev;
 }
+
 
 /**
  * @brief Indica si la lista está vacía
@@ -317,6 +332,7 @@ bool Player_IsEmpty( Player* this )
 	return this->len == 0;
 }
 
+
 /**
  * @brief Indica la cantidad de elementos en la lista
  *
@@ -331,6 +347,7 @@ size_t Player_Len( Player* this )
 	return this->len;
 }
 
+
 /**
  * @brief Elimina todos los elementos de la lista sin eliminar la lista.
  *
@@ -344,13 +361,14 @@ void Player_MakeEmpty( Player* this )
 	}
 }
 
+
 /**
  * @brief Recorre la lista y hace algo en cada uno de sus elementos
  *
  * @param lista Una referencia a la lista de trabajo
- * @param fn Esta funciÃ³n hace algo con el campo de datos 
+ * @param fn Esta funciÃ³n hace algo con el campo de datos
  */
-void Player_Traverse( Player* this, void (*fn)( Playlist item, size_t c ) ) 
+void Player_Traverse( Player* this, void (*fn)( Playlist item, size_t c ) )
 {
 	if( NULL == this ){ return; }
 	size_t cont=0;
@@ -362,9 +380,10 @@ void Player_Traverse( Player* this, void (*fn)( Playlist item, size_t c ) )
 		fn( t->datos,cont );
 		t = t->next;
 
-   } 
+   }
 
 }
+
 
 /**
  * @brief Elimina un elemento en copncreto de todas las listas hijas que lo contengan
@@ -375,16 +394,16 @@ void Player_Traverse( Player* this, void (*fn)( Playlist item, size_t c ) )
  * @pre La lista this debe existir.
  * @post La lista es válida.
  */
-void Player_GralRemove( Player* this, size_t id ) 
+void Player_GralRemove( Player* this, size_t id )
 {
 	if( NULL == this ){ return; }
 	Node_2* t = this->first;
-	
+
 	size_t c=this->len;
    for(size_t i=0;i<c;++i){
-   		
+
 		Playlist_GralRemove(&t->datos,id);
 		t = t->next;
-   } 
+   }
 }
 

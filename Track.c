@@ -106,9 +106,17 @@ void Track_ChangeGenre( Track* this )
 */
 void Track_ChangeYear( Track* this )
 {
-    printf("Año: ");
-    fflush( stdin );
-    scanf("%d", &this->year );
+    char optChar[MAX];
+    scanf("%s", optChar );
+
+    if( validar( optChar ) ){
+        int opt = atoi(optChar);
+        this->year = opt;
+
+    } else{
+        printf("Opción inválida!\n");
+        Track_ChangeYear( this );
+    }
 }
 
 
@@ -119,9 +127,18 @@ void Track_ChangeYear( Track* this )
 */
 void Track_ChangeDuration( Track* this )
 {
-    printf("Duración: ");
-    fflush( stdin );
-    scanf("%d", &this->duration );
+    char optChar[MAX];
+    scanf("%s", optChar );
+
+    if( validar( optChar ) ){
+        int opt = atoi(optChar);
+        this->duration = opt;
+
+    } else{
+        printf("Opción inválida!\n");
+        Track_ChangeDuration( this );
+    }
+
 }
 
 

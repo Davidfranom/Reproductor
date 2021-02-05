@@ -35,7 +35,7 @@ bool Stack_IsEmpty( Stack* this );
 
 bool Stack_IsFull( Stack* this );
 
- */
+
 size_t Stack_Len( Stack* this );
 
 
@@ -47,4 +47,4 @@ void Stack_Print( Stack* this );
 
 void Stack_Copy( Stack* this, const Stack* rhs );
 
-#endif // __PILA_INC__ 
+#endif // __PILA_INC__

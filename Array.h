@@ -2,15 +2,16 @@
  * @file Array.h
  *
  * @brief Contiene las declaraciones de las funciones para el TAD Array que es una arreglo
- * 
  *
- * Array es un TAD que sirve de contenedor, 
+ *
+ * Array es un TAD que sirve de contenedor,
  * tiene como estructura subyacente a un arreglo de enteros
  *
- * @autores Francisco Rodríguez
- * @date 
- * @version 
+ * @author Francisco Rodríguez
+ * @date
+ * @version
  */
+
 #ifndef  ARRAY_INC
 #define  ARRAY_INC
 
@@ -24,14 +25,10 @@ typedef struct
    int len; /*! len es la cantidad de elementos en array*/
 } Array;
 
-Array* Array_new( size_t max_len );
-
-void Array_delete( Array** this );
-
-void Array_set( Array* this, size_t loc, int val );
-
-int Array_get( Array* this, size_t loc );
-
-size_t Array_len( Array* this );
+Array*  Array_new(      size_t max_len );
+void    Array_delete(   Array** this );
+void    Array_set(      Array* this, size_t loc, int val );
+int     Array_get(      Array* this, size_t loc );
+size_t  Array_len(      Array* this );
 
 #endif   /* ----- #ifndef ARRAY_INC  ----- */
