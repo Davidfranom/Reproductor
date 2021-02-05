@@ -1,5 +1,20 @@
+/*
+* @file Track.c
+*
+* @brief Define las funciones de Track	
+*
+* @author Equipo EDA 1		
+*
+* @date 04/02/2021
+*
+*/
 #include "Track.h"
 
+/*
+* @brief Crea un objeto Track
+* @param id El identificador de la canci贸n
+* @return song Regresa una nueva Track
+*/
 
 Track* Track_New(size_t id)
 {
@@ -22,6 +37,11 @@ Track* Track_New(size_t id)
 }
 
 
+/*
+* @brief Elimina una canci贸n
+* @param Track Referencia a una referencia de una cancion
+* @return void No devuelve nada
+*/
 void Track_Delete( Track** this )
 {
     assert( *this );
@@ -31,9 +51,14 @@ void Track_Delete( Track** this )
 
 }
 
+/*
+* @brief Cambia el t铆tulo de la canci贸n
+* @param Track Una referencia a una canci贸n 
+* @return void No devuelve nada
+*/
 void Track_ChangeTitle( Track* this )
 {
-    printf("\nNombre de la canci髇: ");
+    printf("\nNombre de la canci贸n: ");
     //fflush( stdin );
     //fgets(this->title,MAX,stdin);
     fgets(this->title,MAX,stdin);
@@ -41,7 +66,11 @@ void Track_ChangeTitle( Track* this )
     //gets(this->title);
     //printf("Nuevo nombre: %s ", this->title );
 }
-
+/*
+* @brief Cambia el artista de la canci贸n
+* @param Track Una referencia a una canci贸n 
+* @return void No devuelve nada
+*/
 void Track_ChangePerformer( Track* this )
 {
     printf("Artista: ");
@@ -52,10 +81,15 @@ void Track_ChangePerformer( Track* this )
     //gets( this->performer );
     //printf("Nombre del artista: %s ", this->performer );
 }
+/*
+* @brief Cambia el g茅nero de la canci贸n
+* @param Track Una referencia a una canci贸n 
+* @return void No devuelve nada
+*/
 
 void Track_ChangeGenre( Track* this )
 {
-    printf("G閚ero: ");
+    printf("G茅nero: ");
     //fflush( stdin );
     //fgets(this->genre,MAX,stdin);
     fgets(this->genre,MAX,stdin);
@@ -63,57 +97,87 @@ void Track_ChangeGenre( Track* this )
     //gets( this->genre );
     //printf("Nombre del genero: %s ", this->genre );
 }
-
+/*
+* @brief Cambia el a帽o de la canci贸n
+* @param Track Una referencia a una canci贸n 
+* @return void No devuelve nada
+*/
 void Track_ChangeYear( Track* this )
 {
-    printf("A駉: ");
+    printf("A帽o: ");
     fflush( stdin );
     scanf("%d", &this->year );
-    //printf("A駉 de salida: %d ", this->year );
+    //printf("A帽o de salida: %d ", this->year );
 }
-
+/*
+* @brief Cambia la duraci贸n de la canci贸n
+* @param Track Una referencia a una canci贸n 
+* @return void No devuelve nada
+*/
 void Track_ChangeDuration( Track* this )
 {
-    printf("Duraci髇: ");
+    printf("Duraci贸n: ");
     fflush( stdin );
     scanf("%d", &this->duration );
-    //printf("Tiempo de duraci髇: %lf ", this->duration );
+    //printf("Tiempo de duraci贸n: %lf ", this->duration );
 }
-
+/*
+* @brief Imprime los datos de la canci贸n
+* @param Track Una referencia a una canci贸n 
+* @return void No devuelve nada
+*/
 
 void Print_DataTrack( Track* this )
 {
-    printf("\n\tDatos de la canci髇:\n\n");
+    printf("\n\tDatos de la canci贸n:\n\n");
     printf("Nombre: %s\n", this->title );
     printf("Artista: %s\n", this->performer );
-    printf("G閚ero: %s \n", this->genre );
-    printf("A駉 de salida: %d \n", this->year );
-    printf("Tiempo de duraci髇: %d min \n\n", this->duration );
+    printf("G茅nero: %s \n", this->genre );
+    printf("A帽o de salida: %d \n", this->year );
+    printf("Tiempo de duraci贸n: %d min \n\n", this->duration );
 }
 
+/*
+* @brief Obtiene el t铆tulo de la canci贸n
+* @param Track Una referencia a una canci贸n 
+* @return char devuelve el t铆tulo de la canci贸n
+*/
 char* Track_GetTitle(Track* this){
 	assert(this);
 	return (char*)this->title;
 }
+
+/*
+* @brief Obtiene el t铆tulo de la canci贸n
+* @param Track Una referencia a una canci贸n 
+* @return float devuelve la duraci贸n de la canci贸n
+*/
 int Track_GetDuration(Track* this){
 	assert(this);
 	return this->duration;
 }
 
-//Para Traverse
+/*
+* @brief Imprime el t铆tulo de la canci贸n
+* @param Track Recibe una canci贸n
+* @param c Un contador o identificador 
+* @return void No devuelve nada
+*/
 void Print_TrackTitle(Track item,size_t c){
 	printf("%ld. %s\n",c,item.title);
 }
 
+/*
+* @brief valida si dos cadenas de caracteres son identicas
+* @param una referencia a una cadena de caracteres
+* @return bool Verdadero si es identica, Falso si no lo es
+*/
 bool validar(char* this){
     bool res=true;
     size_t c=0;
     while(this[c]!='\0'){
         int i=isdigit(this[c]);
-        c++;
-       
-        //printf("%d\n",i);
-    
+        c++;    
         if(i==0){
             res=false;
             break;
@@ -142,7 +206,7 @@ Track New_Track()
         fflush(stdin);
         gets(New_Track.genre);
 
-        printf("\nIngrese el a駉: ");
+        printf("\nIngrese el a帽o: ");
         fflush(stdin);
         scanf("%d",&New_Track.year);
 
@@ -159,7 +223,7 @@ void imprimir_cancion(Track mostrar_cancion)
     printf("Cancion:%s\n",mostrar_cancion.title);
     printf("Artista:%s\n",mostrar_cancion.performer);
     printf("Genero musical:%s\n",mostrar_cancion.genre);
-    printf("A駉:%d\n",mostrar_cancion.year);
+    printf("A帽o:%d\n",mostrar_cancion.year);
     printf("Duracion:%f\n",mostrar_cancion.duration);
 
 }
