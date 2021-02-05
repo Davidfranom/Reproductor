@@ -60,7 +60,7 @@ cmd > > >:
 		Muestra un aviso si es que no se han agregado canciones aún y regresa al menú de Playlist.
 	
 	- X)	Muestra una lista de todas las canciones en la Playlist y solicita al usuario que ingrese el índice de la que se quiera eliminar.
-		
+		Elimina la canción seleccionada de la playlist actual.
 
 	- P)	Muestra una lista de todas las canciones en la Playlist y solicita al usuario que ingrese el índice de aquella a la que se quiera acceder.
 		Abre el Menú de Canciión.
