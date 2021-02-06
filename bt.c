@@ -116,6 +116,7 @@ int cambio( Array* candidatos, Stack* solucion,Stack* posicion, int p )
  */
 void backtracking(Playlist* playlist_gral,Playlist* this,int limit)
 {
+	Playlist_MakeEmpty(this);
    Array* candidatos = Array_new( Playlist_Len(playlist_gral) ); /*! Se crea un contenedor para los candidatos a partir del tamaño de una lista*/
 
 	Playlist_Cursor_front(playlist_gral);

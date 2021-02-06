@@ -198,7 +198,7 @@ void TestMenuPlaylist( Player* player, Playlist* this, Playlist* that)
                     break;
                 } else{
 
-                	Playlist_MakeEmpty(this);
+                	
                 	//printf("Len: %ld",Playlist_Len(this));
                 	printf("\nOptimización de playlist\n");
         			printf("\nIngrase un límite de tiempo en minutos: \n");
